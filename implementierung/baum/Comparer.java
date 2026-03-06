@@ -59,5 +59,65 @@ public class Comparer
       if (i<0) return -1;
       if (i>0) return 1;
       return 0;
+    }   
+    
+      public int compareLength(int f1, Film f2)
+    {
+      if(f1 < f2.getLaenge())
+      {
+        return -1;
+      }
+      if(f1 > f2.getLaenge())
+      {
+        return 1;
+      }
+      return 0;
+    }
+    
+    public int compareFsk(int f1, Film f2)
+    {
+      if(f1 < f2.getFsk())
+      {
+        return -1;
+      }
+      if(f1 > f2.getFsk())
+      {
+        return 1;
+      }
+      return 0;
+    }
+  
+    public int compareRelease(int f1, Film f2)
+    {
+      if(f1 < f2.getErscheinung())
+      {
+        return -1;
+      }
+      if(f1 > f2.getErscheinung())
+      {
+        return 1;
+      }
+      return 0;
+    }
+
+    public int compareDirector(String f1, Film f2){
+      int i = f1.compareTo(f2.getRegisseur());
+      if (i<0) return -1;
+      if (i>0) return 1;
+      return 0;
+    }  
+    
+     public int compareTitle(String f1, Film f2){
+      int i = f1.compareTo(f2.getTitel());
+      if (i<0) return -1;
+      if (i>0) return 1;
+      return 0;
     }    
+  
+     public int compareGenre(String f1, Film f2){
+      int i = f1.compareTo(f2.getGenre());
+      if (i<0) return -1;
+      if (i>0) return 1;
+      return 0;
+    }     
 }

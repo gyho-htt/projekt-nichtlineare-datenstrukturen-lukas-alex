@@ -108,33 +108,140 @@ class Film implements ComparableContent<Film>
     return false; 
   } 
   
+  public boolean isGreater(int pFilm, String pAttribut)
+  {
+    if(pAttribut.equals("laenge")){
+      int pErgebnis = vergleicher.compareLength(this, pFilm);
+      if(pErgebnis == 1) return true;
+      if(pErgebnis == -1 || pErgebnis == 0) return false;
+    }else if (pAttribut.equals("fsk")) {
+      int pErgebnis = vergleicher.compareFsk(this, pFilm);
+      if(pErgebnis == 1) return true;
+      if(pErgebnis == -1 || pErgebnis == 0) return false;  
+    } else if (pAttribut.equals("erscheinung")) {
+      int pErgebnis = vergleicher.compareRelease(this, pFilm);
+      if(pErgebnis == 1) return true;
+      if(pErgebnis == -1 || pErgebnis == 0) return false;  
+    } 
+    return false;  
+  }
+  
+  public boolean isEqual(int pFilm, String pAttribut)
+  {
+    if(pAttribut.equals("laenge")){
+      int pErgebnis = vergleicher.compareLength(this, pFilm);
+      if(pErgebnis == 0) return true;
+      if(pErgebnis == -1 || pErgebnis == 1) return false;
+    }else if (pAttribut.equals("fsk")) {
+      int pErgebnis = vergleicher.compareFsk(this, pFilm);
+      if(pErgebnis == 0) return true;
+      if(pErgebnis == -1 || pErgebnis == 1) return false;  
+    } else if (pAttribut.equals("erscheinung")) {
+      int pErgebnis = vergleicher.compareRelease(this, pFilm);
+      if(pErgebnis == 0) return true;
+      if(pErgebnis == -1 || pErgebnis == 1) return false;  
+    } 
+    return false;  
+  }
+  
+  public boolean isLess(int pFilm, String pAttribut)
+  {
+    if(pAttribut.equals("laenge")){
+      int pErgebnis = vergleicher.compareLength(this, pFilm);
+      if(pErgebnis == -1) return true;
+      if(pErgebnis == 1 || pErgebnis == 0) return false;
+    } else if (pAttribut.equals("fsk")) {
+      int pErgebnis = vergleicher.compareFsk(this, pFilm);
+      if(pErgebnis == -1) return true;
+      if(pErgebnis == 1 || pErgebnis == 0) return false;  
+    } else if (pAttribut.equals("erscheinung")) {
+      int pErgebnis = vergleicher.compareRelease(this, pFilm);
+      if(pErgebnis == -1) return true;
+      if(pErgebnis == 1 || pErgebnis == 0) return false;  
+    } 
+    return false; 
+  } 
+  
+  public boolean isGreater(String pFilm, String pAttribut)
+  {
+    if(pAttribut.equals("regisseur")) {
+      int pErgebnis = vergleicher.compareDirector(this, pFilm);
+      if(pErgebnis == 1) return true;
+      if(pErgebnis == -1 || pErgebnis == 0) return false;
+    } else if (pAttribut.equals("titel")) {
+      int pErgebnis = vergleicher.compareTitle(this, pFilm);
+      if(pErgebnis == 1) return true;
+      if(pErgebnis == -1 || pErgebnis == 0) return false;  
+    } else if (pAttribut.equals("genre")) {
+      int pErgebnis = vergleicher.compareGenre(this, pFilm);
+      if(pErgebnis == 1) return true;
+      if(pErgebnis == -1 || pErgebnis == 0) return false;  
+    } 
+    return false;  
+  }
+  
+  public boolean isEqual(String pFilm, String pAttribut)
+  {
+   if(pAttribut.equals("regisseur")) {
+      int pErgebnis = vergleicher.compareDirector(this, pFilm);
+      if(pErgebnis == 0) return true;
+      if(pErgebnis == -1 || pErgebnis == 1) return false;
+    } else if (pAttribut.equals("titel")) {
+      int pErgebnis = vergleicher.compareTitle(this, pFilm);
+      if(pErgebnis == 0) return true;
+      if(pErgebnis == -1 || pErgebnis == 1) return false;  
+    } else if (pAttribut.equals("genre")) {
+      int pErgebnis = vergleicher.compareGenre(this, pFilm);
+      if(pErgebnis == 0) return true;
+      if(pErgebnis == -1 || pErgebnis == 1) return false;  
+    } 
+    return false;  
+  }
+  
+  public boolean isLess(String pFilm, String pAttribut)
+  {
+    if(pAttribut.equals("regisseur")) {
+      int pErgebnis = vergleicher.compareDirector(this, pFilm);
+      if(pErgebnis == -1) return true;
+      if(pErgebnis == 1 || pErgebnis == 0) return false;
+    } else if (pAttribut.equals("titel")) {
+      int pErgebnis = vergleicher.compareTitle(this, pFilm);
+      if(pErgebnis == -1) return true;
+      if(pErgebnis == 1 || pErgebnis == 0) return false;  
+    } else if (pAttribut.equals("genre")) {
+      int pErgebnis = vergleicher.compareGenre(this, pFilm);
+      if(pErgebnis == -1) return true;
+      if(pErgebnis == 1 || pErgebnis == 0) return false;  
+    } 
+    return false; 
+  } 
   public int getLaenge()
   {
     return laenge;
   }
   
-   public int getFsk()
+  public int getFsk()
   {
     return fsk;
   }
   
-   public int getErscheinung()
+  public int getErscheinung()
   {
     return erscheinung;
   }
   
-   public String getRegisseur()
+  public String getRegisseur()
   {
     return regisseur;
   }
   
-   public String getTitel()
+  public String getTitel()
   {
     return titel;
   }
   
-   public String getGenre()
+  public String getGenre()
   {
     return genre;
   }
-  }
+}

@@ -1,0 +1,145 @@
+public class BinarySearchTree<ContentType extends ComparableContent<ContentType>> {
+
+  private class BSTNode<CT extends ComparableContent<CT>> {
+    
+    private CT content;                         ppp
+    private BinarySearchTree<CT> left, right;
+
+    public BSTNode(CT pContent) {
+      this.content = pContent;
+      left = new BinarySearchTree<CT>();
+      right = new BinarySearchTree<CT>();
+    }
+    
+  }
+
+
+  private BSTNode<ContentType> node;
+
+  public BinarySearchTree() {
+    this.node = null;
+  }
+
+  public boolean isEmpty() {
+    return this.node == null;
+  }
+
+  public void insert(ContentType pContent, String pAttribut) {
+    if (pContent != null) {
+      if (isEmpty()) {
+        this.node = new BSTNode<ContentType>(pContent);
+      } else if (pContent.isLess(this.node.content, pAttribut)) {
+        this.node.left.insert(pContent, pAttribut);
+      } else if(pContent.isGreater(this.node.content,pAttribut)) {
+        this.node.right.insert(pContent, pAttribut);
+      }
+    }
+  }
+
+  public BinarySearchTree<ContentType> getLeftTree() {
+    if (this.isEmpty()) {
+      return null;
+    } else {
+      return this.node.left;
+    }
+  }
+
+  public ContentType getContent() {
+    if (this.isEmpty()) {
+      return null;
+    } else {
+      return this.node.content;
+    }
+  }
+
+  public BinarySearchTree<ContentType> getRightTree() {
+    if (this.isEmpty()) {
+      return null;
+    } else {
+      return this.node.right;
+    }
+  }
+
+  public void remove(ContentType pContent, String pAttribut) {
+    if (isEmpty() || pContent == null ) {
+      return;
+    }
+    
+    if (pContent.isLess(node.content, pAttribut)) {
+      node.left.remove(pContent, pAttribut);
+    } else if (pContent.isGreater(node.content, pAttribut)) {
+      node.right.remove(pContent, pAttribut);
+    } else {
+      if (node.left.isEmpty()) {
+        if (node.right.isEmpty()) {
+          node = null;
+        } else {
+          node = getNodeOfRightSuccessor();
+        }
+      } else if (node.right.isEmpty()) {
+        node = getNodeOfLeftSuccessor();
+      } else {
+        if (getNodeOfRightSuccessor().left.isEmpty()) {
+          node.content = getNodeOfRightSuccessor().content;
+          node.right = getNodeOfRightSuccessor().right;
+        } else {
+          BinarySearchTree<ContentType> previous = node.right
+              .ancestorOfSmallRight();
+          BinarySearchTree<ContentType> smallest = previous.node.left;
+          this.node.content = smallest.node.content;
+          previous.remove(smallest.node.content, pAttribut);
+        }
+      }
+    }   
+  }
+
+  public ContentType search(String pContent, String pAttribut) {
+    if (this.isEmpty() || pContent == null) {
+      return null;
+    } else {
+      ContentType content = this.getContent();
+      if (pContent.isLess(content, pAttribut)) {
+        return this.getLeftTree().search(pContent, pAttribut);
+      } else if (pContent.isGreater(content, pAttribut)) {
+        return this.getRightTree().search(pContent, pAttribut);
+      } else if (pContent.isEqual(content, pAttribut)) {
+        return content;       
+      } else {  
+        return null;
+      }
+    }
+  }
+
+  public ContentType search(int pContent, String pAttribut) {
+    if (this.isEmpty() || pContent == null) {
+      return null;
+    } else {
+      ContentType content = this.getContent();
+      if (pContent.isLess(content, pAttribut)) {
+        return this.getLeftTree().search(pContent, pAttribut);
+      } else if (pContent.isGreater(content, pAttribut)) {
+        return this.getRightTree().search(pContent, pAttribut);
+      } else if (pContent.isEqual(content, pAttribut)) {
+        return content;       
+      } else {  
+        return null;
+      }
+    }
+  }
+  private BinarySearchTree<ContentType> ancestorOfSmallRight() {    
+    if (getNodeOfLeftSuccessor().left.isEmpty()) {
+      return this;
+    } else {
+      return node.left.ancestorOfSmallRight();
+    }
+  }
+
+  private BSTNode<ContentType> getNodeOfLeftSuccessor() {
+    return node.left.node;
+  }
+
+  private BSTNode<ContentType> getNodeOfRightSuccessor() {
+    return node.right.node;
+  }
+
+}
